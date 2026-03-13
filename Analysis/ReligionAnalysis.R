@@ -3,16 +3,15 @@ read.csv("Data/Complete_Data - 1.csv")
 myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
 # Assign File to something, header true needed to count first row as header not data
 
+
 myData$Demographics_relig <- as.factor(myData$Demographics_relig)
 #Turn Religion Into Groups
+
 model1 <- aov(Psychological.Wellness ~ myData$Demographics_relig, data = myData)
+summary(model1)
 TukeyHSD(model1)
 #Anova + Tukey for Post-Hoc
-summary(model1)
-# Psychological Wellness Mean = 4.631, St. Dev = 0.7435167
-# P .675 > 0.05, No Stat Sig Diff For Psych Wellness by Religion
 
-model2 <- lm(Psychological.Wellness ~ myData$Demographics_rlgsty, data = myData)
-#linear regression for psych wellness and religiosity
-summary(model2)
-#P .212 > 0.05, no stat sig relationship between Psych Wellness and Religiosity
+
+
+
