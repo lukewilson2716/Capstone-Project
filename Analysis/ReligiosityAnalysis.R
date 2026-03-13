@@ -3,30 +3,29 @@ read.csv("Data/Complete_Data - 1.csv")
 myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
 # Assign File to something, header true needed to count first row as header not data
 
+#1/3 of data (2023) missing
 
-model1 <- lm(Psychological.Wellness ~ myData$Demographics_rlgsty, data = myData)
-#linear regression for psych wellness and religiosity
+
+model1 <- lm(Total_Psych_Wellbeing ~ myData$Demographics_rlgsty, data = myData)
 summary(model1)
+#linear regression for psych wellness and religiosity - nothin
 
 model2 <- lm(Total_Spirit_Wellbeing ~ myData$Demographics_rlgsty, data = myData)
 summary(model2)
-#linear regression for spiritual wellness and religiosity - stat sig result! Although 1/3 of data not there.
+#linear regression for spiritual wellness and religiosity -  STAT SIG result! Although 1/3 of data not there.
 
+model3 <- lm(Total_Social_Wellbeing ~ myData$Demographics_rlgsty, data = myData)
+summary(model3)
+#linear regression for spiritual wellness and religiosity - nothin
 
-ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Int_Wellbeing)) +
-  geom_jitter(alpha = 0.5, color = "darkblue", width = 0.2, height = 0.2) +
-  geom_smooth(method = "lm", color = "red", se = TRUE) + # Adds a trend line
-  labs(title = "Religiosity vs. Intellectual Well-being",
-       x = "Religiosity Score (1-7)",
-       y = "Total Well-being Score (1-7)") +
-  theme_minimal()
-#Plot of religiosity & Intellectual wellbeing
+model4 <- lm(Total_Emot_Wellbeing ~ myData$Demographics_rlgsty, data = myData)
+summary(model4)
+#linear regression for Emotional wellness and religiosity - Almost
 
-ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
-  geom_jitter(alpha = 0.5, color = "darkblue", width = 0.2, height = 0.2) +
-  geom_smooth(method = "lm", color = "red", se = TRUE) + # Adds a trend line
-  labs(title = "Religiosity vs. Spiritual Well-being",
-       x = "Religiosity Score (1-7)",
-       y = "Total Well-being Score (1-7)") +
-  theme_minimal()
-#Plot of religiosity & Spiritual wellbeing - very strong for poster prob
+model5 <- lm(Total_Int_Wellbeing ~ myData$Demographics_rlgsty, data = myData)
+summary(model5)
+#linear regression for Int wellness and religiosity - trash lol
+
+model6 <- lm(Total_Physical_Wellbeing ~ myData$Demographics_rlgsty, data = myData)
+summary(model6)
+#linear regression for physical wellness and religiosity -nothin

@@ -27,8 +27,6 @@ TukeyHSD(model3)
 model4 <- aov(Total_Spirit_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model4)
 TukeyHSD(model4)
-boxplot(Total_Spirit_Wellbeing ~ Demographics_relig, data = myData, 
-        main="Outcome by Religion", col="lightblue")
 # Also sig I def did something wrong
 
 
