@@ -7,10 +7,15 @@ myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
 myData$Demographics_relig <- as.factor(myData$Demographics_relig)
 #Turn Religion Into Groups
 
-model1 <- aov(Psychological.Wellness ~ myData$Demographics_relig, data = myData)
+model1 <- aov(Total_Int_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model1)
 TukeyHSD(model1)
-#Anova + Tukey for Post-Hoc
+#Anova + Tukey for Post-Hoc - Significant???
+
+model1 <- aov(Total_Emot_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model1)
+TukeyHSD(model1)
+#Anova + Tukey for Post-Hoc -
 
 
 
