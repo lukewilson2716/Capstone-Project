@@ -15,12 +15,12 @@ TukeyHSD(model1)
 model2 <- aov(Total_Emot_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model2)
 TukeyHSD(model2)
-#Anova + Tukey for Post-Hoc -
+#Anova + Tukey for Post-Hoc - Not sig
 
 model3 <- aov(Total_Social_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model3)
 TukeyHSD(model3)
-# Social Also sig? I might have done sum wrong
+# Social - Sig result
 
 model4 <- aov(Total_Spirit_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model4)
@@ -32,7 +32,7 @@ model5 <- aov(Total_Psych_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model5)
 TukeyHSD(model5)
 # Not sig
-#Check 6 vs everyone maybe?
+#Check 6 vs everyone maybe - interesting boxplot
 
 model6 <- aov(Total_Physical_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model6)

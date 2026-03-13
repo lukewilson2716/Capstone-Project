@@ -21,3 +21,5 @@ boxplot(Total_Psych_Wellbeing ~ Demographics_relig, data = myData,
 
 boxplot(Total_Physical_Wellbeing ~ Demographics_relig, data = myData, 
         main="Outcome by Religion", col="lightblue")
+
+
