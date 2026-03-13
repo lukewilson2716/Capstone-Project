@@ -6,3 +6,18 @@ myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
 
 boxplot(Total_Spirit_Wellbeing ~ Demographics_relig, data = myData, 
         main="Outcome by Religion", col="lightblue")
+
+boxplot(Total_Emot_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
+
+boxplot(Total_Int_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
+
+boxplot(Total_Social_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
+
+boxplot(Total_Psych_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
+
+boxplot(Total_Physical_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
