@@ -3,7 +3,7 @@
     "path": "~/Desktop/Capstone-Project/Analysis/ReligionAnalysis.R",
     "project_path": "Analysis/ReligionAnalysis.R",
     "type": "r_source",
-    "hash": "3314720973",
+    "hash": "86596636",
     "contents": "",
     "dirty": false,
     "created": 1773408125474.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "17,29",
-        "scrollLine": "0"
+        "cursorPosition": "31,0",
+        "scrollLine": "13"
     },
     "folds": "",
-    "lastKnownWriteTime": 1773410627,
+    "lastKnownWriteTime": 1773411040,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1773410627943,
+    "last_content_update": 1773411040095,
     "read_only": false,
     "read_only_alternatives": []
 }

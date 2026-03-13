@@ -10,13 +10,26 @@ myData$Demographics_relig <- as.factor(myData$Demographics_relig)
 model1 <- aov(Total_Int_Wellbeing ~ myData$Demographics_relig, data = myData)
 summary(model1)
 TukeyHSD(model1)
-#Anova + Tukey for Post-Hoc - Significant???
+boxplot(Total_Int_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
+#Anova + Tukey for Post-Hoc - Significant??? No Tukey tho 8 and 2 most diff but 8 only has like 2 people
 
-model1 <- aov(Total_Emot_Wellbeing ~ myData$Demographics_relig, data = myData)
-summary(model1)
-TukeyHSD(model1)
+model2 <- aov(Total_Emot_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model2)
+TukeyHSD(model2)
 #Anova + Tukey for Post-Hoc -
 
+model3 <- aov(Total_Social_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model3)
+TukeyHSD(model3)
+# Social Also sig? I might have done sum wrong
+
+model4 <- aov(Total_Spirit_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model4)
+TukeyHSD(model4)
+boxplot(Total_Spirit_Wellbeing ~ Demographics_relig, data = myData, 
+        main="Outcome by Religion", col="lightblue")
+# Also sig I def did something wrong
 
 
 
