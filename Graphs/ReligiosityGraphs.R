@@ -2,7 +2,7 @@ read.csv("Data/Complete_Data - 1.csv")
 # Read the file, Data/ to access it in the folder
 myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
 # Assign File to something, header true needed to count first row as header not data
-
+#hi
 
 
 ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Int_Wellbeing)) +
