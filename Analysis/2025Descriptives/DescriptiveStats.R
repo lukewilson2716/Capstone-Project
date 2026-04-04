@@ -6,7 +6,7 @@ print(summary(myData$Psychological.Wellness))
 # This Gives Mean + Quartile info
 print(sd(myData$Psychological.Wellness, na.rm = TRUE))
 # St Dev, na.rm to ignore NA responses
-#hi
+#hihows it going
 
 myData$Demographics_relig <- as.factor(myData$Demographics_relig)
 #Turn Religion Into Groups
