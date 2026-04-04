@@ -31,4 +31,3 @@ ggplot(myData, aes(x = Demographics_rlgsty, y = Spiritual.Wellness)) +
        x = "Religiosity Score (1-7)",
        y = "Total Well-being Score (1-7)") +
   theme_minimal()
-#Oh our datas goated
