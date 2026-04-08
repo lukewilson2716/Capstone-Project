@@ -45,12 +45,40 @@ summary(covModel2)
 
 
 
-ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Int_Wellbeing, color = Religion_Cluster)) +
+title1 <- str_wrap("Overall Wellbeing", width = 30)
+title2 <- str_wrap("Emotional Wellbeing", width = 30)
+title3 <- str_wrap("Intellectual Wellbeing", width = 30)
+
+ a1 <- ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Psych_Wellbeing, color = Religion_Cluster)) +
   geom_point(alpha = 0.4) + 
   geom_smooth(method = "lm", formula = y ~ x) + # Adds a linear regression line for each group
-  labs(title = "Relationship Between Religiosity and Wellbeing",
+  labs(title = title1,
        subtitle = "By Religious Cluster",
        x = "Religiosity Score",
        y = "Wellbeing Score") +
   theme_minimal()
-#visualization of results above, athiest trendline is much different. Pretty cool prob worth including
+#Psych wellbeing graph
+
+a2 <- ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Emot_Wellbeing, color = Religion_Cluster)) +
+  geom_point(alpha = 0.4) + 
+  geom_smooth(method = "lm", formula = y ~ x) + # Adds a linear regression line for each group
+  labs(title = title2,
+       subtitle = "By Religious Cluster",
+       x = "Religiosity Score",
+       y = "Wellbeing Score") +
+  theme_minimal()
+#emotional wellbeing graph
+
+a3 <- ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Int_Wellbeing, color = Religion_Cluster)) +
+  geom_point(alpha = 0.4) + 
+  geom_smooth(method = "lm", formula = y ~ x) + # Adds a linear regression line for each group
+  labs(title = title3,
+       subtitle = "By Religious Cluster",
+       x = "Religiosity Score",
+       y = "Wellbeing Score") +
+  theme_minimal()
+#int wellbeing graph
+
+a1 + a2 + a3 + plot_layout(guides = "collect") + plot_annotation(title = "Clustered Anaylsis of Religion, Religiosity, and their Relationship with Well-Being")
+#visualization for the poster maybe
+                                                                 
