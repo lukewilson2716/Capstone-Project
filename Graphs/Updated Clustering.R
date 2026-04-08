@@ -106,6 +106,6 @@ a4 <- ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellb
 #int wellbeing graph
 a4
 
-a1 + a2 + a3 + plot_layout(guides = "collect") + plot_annotation(title = "Clustered Anaylsis of Religion, Religiosity, and their Relationship with Well-Being")
+a1 + a2 + a3 + plot_layout(guides = "collect") + plot_annotation(title = "Clustered Analysis of Religion, Religiosity, and their Relationship with Well-Being")
 #visualization for the poster maybe
                                                                  
