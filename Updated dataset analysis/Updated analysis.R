@@ -15,21 +15,36 @@ summary(model2)
 #linear regression for spiritual wellness and religiosity -  STAT SIG result! Although 1/3 of data not there.
 #Due to bonferronis if we are counting 6 groups our p should be 0.05/6=0.008, still stat sig but if we looking for more groups it wont be.
 
-ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
-  geom_jitter(alpha = 0.5, color = "darkblue", width = 0.2, height = 0.2) +
-  geom_smooth(method = "lm", color = "red", se = TRUE) + # Adds a trend line
-  labs(title = "Religiosity vs. Spiritual Well-being",
-       x = "Religiosity Score (1-7)",
-       y = "Total Well-being Score (1-7)") +
-  theme_minimal()
-#Plot of religiosity & Spiritual wellbeing - VERY STRONG for poster prob
 
+model1 <- aov(Total_Int_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model1)
+TukeyHSD(model1)
+#Anova + Tukey for Post-Hoc - not sig 
 
-ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Psych_Wellbeing)) +
-  geom_jitter(alpha = 0.5, color = "darkblue", width = 0.2, height = 0.2) +
-  geom_smooth(method = "lm", color = "red", se = TRUE) + # Adds a trend line
-  labs(title = "Religiosity vs. Psych Well-being",
-       x = "Religiosity Score (1-7)",
-       y = "Total Well-being Score (1-7)") +
-  theme_minimal()
+model2 <- aov(Total_Emot_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model2)
+TukeyHSD(model2)
+#Anova + Tukey for Post-Hoc - Not sig
+
+model3 <- aov(Total_Social_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model3)
+TukeyHSD(model3)
+# Social - Sig result
+
+model4 <- aov(Total_Spirit_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model4)
+TukeyHSD(model4)
+# Also sig
+#Check 6 vs everyone maybe?
+
+model5 <- aov(Total_Psych_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model5)
+TukeyHSD(model5)
+# Not sig
+#Check 6 vs everyone maybe - interesting boxplot, almost sig
+
+model6 <- aov(Total_Physical_Wellbeing ~ myData$Demographics_relig, data = myData)
+summary(model6)
+TukeyHSD(model6)
+# Not sig
 
