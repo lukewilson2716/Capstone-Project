@@ -71,3 +71,5 @@ ggplot(myData_sex_long, aes(x = Wellness_Dimension, y = Score, fill = Sex_Group)
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "bottom") # Legend to the bottom
+
+
