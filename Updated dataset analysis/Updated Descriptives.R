@@ -30,7 +30,7 @@ print(table(myData$Demographics_class))
 
 print(summary(myData$Total_Psych_Wellbeing))
 print(sd(myData$Total_Psych_Wellbeing, na.rm = TRUE))
-#Psych Wellbeing Descriptives - Mean 4.2.51 SD .9398 - Drop off
+#Psych Wellbeing Descriptives - Mean 4.251 SD .9398 - Drop off
 
 print(summary(myData$Total_Physical_Wellbeing))
 print(sd(myData$Total_Physical_Wellbeing, na.rm = TRUE))
