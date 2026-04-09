@@ -5,6 +5,7 @@ myData <- read.csv("Data/new_complete_data - Sheet1.csv", header = TRUE)
 library(dplyr)
 library(ggplots2)
 library(patchwork)
+library(ggpubr)
 #needed for this script
 
 myData_cleaned <- myData %>%
@@ -105,9 +106,13 @@ a4 <- ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellb
   theme_minimal()
 #int wellbeing graph
 a4
+
+my_comparisons <- list( c("Christian", "Atheist"), c("Atheist", "Other"), c("Christian", "Other") )
 ggplot(myData_cleaned, aes(x = Religion_Cluster, y = Total_Spirit_Wellbeing, fill = Religion_Cluster)) +
   geom_boxplot() +
-  labs(title = "Spirit Wellbeing Across Clusters",
+  stat_compare_means(comparisons = my_comparisons, label = "p.signif") +
+  coord_flip() +
+  labs(title = "Spiritual Well-Being Across Religious Clusters",
        x = "Cluster Group",
        y = "Total Spirit Wellbeing") +
   theme_minimal() + theme(legend.position = "bottom")
