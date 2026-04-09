@@ -9,6 +9,9 @@ library(ggpubr)
 
 table(myData$Demographics_sex)
 
+
+
+
 # Prepare Data
 myData_class_long <- myData %>%
   mutate(Demographics_class = as.numeric(Demographics_class)) %>%
