@@ -1,52 +1,52 @@
-read.csv("Data/new_complete_data - Sheet1.csv")
-# Read the file, Data/ to access it in the folder
-myData <- read.csv("Data/new_complete_data - Sheet1.csv", header = TRUE)
-# Assign File to something, header true needed to count first row as header not data
+
 library(dplyr)
 library(ggplot2)
 library(patchwork)
-library(ggpubr)
-#needed for this script
 
-myData_cleaned <- myData %>%
-  mutate(Religion_Cluster = case_when(
-    Demographics_relig == "1" ~ "Christian",
-    TRUE ~ "Other"  # This catches "1,6", other numbers, and NAs
-  ))
-
-
+# 1. Prepare the data
 myData_cleaned <- myData %>%
   mutate(Religion_Cluster = case_when(
     Demographics_relig == "1" ~ "Christian",
     Demographics_relig == "6" ~ "Atheist",
     TRUE ~ "Other" 
   )) %>%
-  # Filter out rows with missing values in your key variables
   filter(!is.na(Demographics_rlgsty), !is.na(Total_Spirit_Wellbeing))
 
-# 3. Create the Smoothed Heatmap
-# stat_density_2d creates the "smooth" matrix effect
-ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
-  # Fill the area with a smooth density gradient
-  stat_density_2d(aes(fill = after_stat(density)), 
-                  geom = "raster", 
-                  contour = FALSE, 
-                  n = 200) + 
-  # Use facet_wrap to create one graph per cluster
-  facet_wrap(~Religion_Cluster) +
-  # Color palette - 'magma' or 'viridis' work well for heatmaps
-  scale_fill_viridis_c(option = "magma") +
-  # Ensure the axes reflect your 1-7 scale
+# 2. Create the individual plots
+
+# Plot 1: Christian (Red Scale)
+p1 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Christian"), 
+             aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
+  stat_density_2d(aes(fill = after_stat(density)), geom = "raster", contour = FALSE, n = 200) +
+  scale_fill_gradient(low = "white", high = "#FF0000") + # Red
   scale_x_continuous(limits = c(1, 7), breaks = 1:7) +
   scale_y_continuous(limits = c(1, 7), breaks = 1:7) +
-  labs(
-    title = "Religiosity vs. Wellbeing Heatmap",
-    subtitle = "Separated by Religion Cluster (Smoothed Density)",
-    x = "Religiosity (1-7)",
-    y = "Spiritual Wellbeing (1-7)",
-    fill = "Density"
-  ) +
-  theme_minimal() +
-  theme(panel.spacing = unit(2, "lines"),
-        strip.text = element_text(face = "bold", size = 12))
+  labs(title = "Christian", x = "Religiosity", y = "Spiritual Wellbeing") +
+  theme_minimal() + theme(legend.position = "none")
 
+# Plot 2: Atheist (Purple Scale)
+p2 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Atheist"), 
+             aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
+  stat_density_2d(aes(fill = after_stat(density)), geom = "raster", contour = FALSE, n = 200) +
+  scale_fill_gradient(low = "white", high = "#6A0DAD") + # Purple
+  scale_x_continuous(limits = c(1, 7), breaks = 1:7) +
+  scale_y_continuous(limits = c(1, 7), breaks = 1:7) +
+  labs(title = "Atheist", x = "Religiosity", y = "") + # Removed Y label for middle plot
+  theme_minimal() + theme(legend.position = "none")
+
+# Plot 3: Other (Blue/Steel Scale)
+p3 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Other"), 
+             aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
+  stat_density_2d(aes(fill = after_stat(density)), geom = "raster", contour = FALSE, n = 200) +
+  scale_fill_gradient(low = "white", high = "steelblue") + 
+  scale_x_continuous(limits = c(1, 7), breaks = 1:7) +
+  scale_y_continuous(limits = c(1, 7), breaks = 1:7) +
+  labs(title = "Other", x = "Religiosity", y = "") + # Removed Y label for clean look
+  theme_minimal() + theme(legend.position = "none")
+
+# 3. Combine them using patchwork
+(p1 | p2 | p3) + 
+  plot_annotation(
+    title = "Religiosity vs. Spiritual Wellbeing by Group",
+    subtitle = "Darker colors indicate higher density of participants"
+  )
