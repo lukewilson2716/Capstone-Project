@@ -150,6 +150,7 @@ p9 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Other"),
 
 
 
+  
 
 
 p1 <- ggplot(filter(myData_density_compare, Religion_Cluster == "Christian"), 
@@ -161,11 +162,11 @@ p1 <- ggplot(filter(myData_density_compare, Religion_Cluster == "Christian"),
                   aes(fill = after_stat(count)), geom = "raster", contour = FALSE, 
                   n = 200, na.rm = TRUE, show.legend = FALSE,
                   lims = c(1, 7, 1, 7)) + # Sets calculation limits for [x_min, x_max, y_min, y_max]
-  scale_fill_gradient(low = "white", high = "#FF0000") + 
+  scale_fill_gradient(low = "white", high = "#E69F00") + 
   
   # 2. Underclassmen Heat (Blue)
   stat_density_2d(data = filter(myData_density_compare, Religion_Cluster == "Christian", Year_Group == "Underclassmen"),
-                  aes(alpha = after_stat(count)), fill = "blue", geom = "raster", contour = FALSE, 
+                  aes(alpha = after_stat(count)), fill = "#56B4E9", geom = "raster", contour = FALSE, 
                   n = 200, na.rm = TRUE, show.legend = FALSE,
                   lims = c(1, 7, 1, 7)) + # Sets calculation limits here too
   
