@@ -105,6 +105,14 @@ a4 <- ggplot(myData_cleaned, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellb
   theme_minimal()
 #int wellbeing graph
 a4
+ggplot(myData_cleaned, aes(x = Religion_Cluster, y = Total_Spirit_Wellbeing, fill = Religion_Cluster)) +
+  geom_boxplot() +
+  labs(title = "Spirit Wellbeing Across Clusters",
+       x = "Cluster Group",
+       y = "Total Spirit Wellbeing") +
+  theme_minimal() + theme(legend.position = "bottom")
+#boxplot of new results
+
 
 a1 + a2 + a3 + plot_layout(guides = "collect") + plot_annotation(title = "Clustered Analysis of Religion, Religiosity, and their Relationship with Well-Being")
 #visualization for the poster maybe
