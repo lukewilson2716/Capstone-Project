@@ -34,10 +34,10 @@ ggplot(myData_class_long, aes(x = Wellness_Dimension, y = Score, fill = Year_Gro
   coord_cartesian(ylim = c(1, 8)) + 
   theme_minimal() +
   theme(axis.text.x = element_text(hjust = 1), legend.position = "bottom") 
+#top line to make plot, second to make violin, third for mean dots, fourth for stat sig comp, everything else aesthetics
 
 
-
-#Prepare Data for sexual orientation analysis - no results of note
+#Prepare Data for sexual orientation analysis - no results of note and pretty much the same process as class analysis above
 myData_sex_long <- myData %>%
   mutate(Demographics_sex = as.numeric(Demographics_sex)) %>%
   mutate(Sex_Group = case_when(

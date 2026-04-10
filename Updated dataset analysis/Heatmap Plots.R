@@ -7,6 +7,7 @@ library(dplyr)
 library(ggplot2)
 library(patchwork)
 library(tidyverse)
+#packages installed for this i might miss a few but ggplot for visualization tidyverse for data cleaning & patchwork to combine graphs
 
 #Data prep
 myData_cleaned <- myData %>%
@@ -16,7 +17,7 @@ myData_cleaned <- myData %>%
     TRUE ~ "Other" 
   )) %>%
   filter(!is.na(Demographics_rlgsty), !is.na(Total_Spirit_Wellbeing))
-
+#Cluster groups due to small group sizes & change data class to workable format
 
 #Plot 1: Christianity (Red)
 p1 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Christian"), 
@@ -29,7 +30,7 @@ p1 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Christian"),
   scale_y_continuous(limits = c(1, 7), breaks = 1:7) +
   labs(title = "Christianity", x = "Religiosity", y = "Spiritual Wellbeing") +
   theme_minimal() + theme(legend.position = "none")
-
+#ggplot for visualization, stat density for heatmap function, geom smooth for matrix smoothing, everything else aesthetics
 
 #Plot 2: Atheism (Purple)
 p2 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Atheist"), 
@@ -42,6 +43,7 @@ p2 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Atheist"),
   scale_y_continuous(limits = c(1, 7), breaks = 1:7) +
   labs(title = "Atheism", x = "Religiosity", y = "") +
   theme_minimal() + theme(legend.position = "none")
+#Same format as p1 above
 
 #Plot 3: Other (Blue)
 p3 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Other"), 
@@ -152,8 +154,6 @@ p9 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Other"),
 #Heat map by class
 p1 <- ggplot(filter(myData_density_compare, Religion_Cluster == "Christian"), 
              aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
-  
-#Upperclassmen
   stat_density_2d(data = filter(myData_density_compare, Religion_Cluster == "Christian", Year_Group == "Upperclassmen"),
                   aes(fill = after_stat(count)), geom = "raster", contour = FALSE, 
                   n = 200, na.rm = TRUE, show.legend = FALSE,
