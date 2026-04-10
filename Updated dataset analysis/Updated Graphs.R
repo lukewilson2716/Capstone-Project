@@ -10,7 +10,7 @@ ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Spirit_Wellbeing)) +
        x = "Religiosity Score (1-7)",
        y = "Total Well-being Score (1-7)") +
   theme_minimal()
-#Plot of religiosity & Spiritual wellbeing - VERY STRONG for poster prob
+#Box & Whiskers Plot of religiosity & Spiritual wellbeing
 
 
 ggplot(myData, aes(x = Demographics_rlgsty, y = Total_Psych_Wellbeing)) +
