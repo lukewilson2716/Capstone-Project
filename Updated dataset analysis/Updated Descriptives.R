@@ -2,6 +2,29 @@ read.csv("Data/new_complete_data - Sheet1.csv")
 # Read the file, Data/ to access it in the folder
 myData <- read.csv("Data/new_complete_data - Sheet1.csv", header = TRUE)
 
+print(myData)
+
+library(dplyr)
+
+# 1. Underclassmen Percentage (Class 1 or 2)
+underclassmen_christian_count <- myData %>%
+  filter(Demographics_class %in% c(1, 2)) %>%
+  filter(Demographics_relig == 1) %>%
+  nrow()
+
+underclassmen_percent <- (underclassmen_christian_count / 88) * 100
+
+# 2. Upperclassmen Percentage (Class 3 or 4)
+upperclassmen_christian_count <- myData %>%
+  filter(Demographics_class %in% c(3, 4)) %>%
+  filter(Demographics_relig == 1) %>%
+  nrow()
+
+upperclassmen_percent <- (upperclassmen_christian_count / 243) * 100
+
+# Print Results
+cat("Underclassmen Christians (Class 1-2):", underclassmen_christian_count, "out of 88 (", round(underclassmen_percent, 2), "%)\n")
+cat("Upperclassmen Christians (Class 3-4):", upperclassmen_christian_count, "out of 243 (", round(upperclassmen_percent, 2), "%)\n")
 
 #Demographic Descriptives
 print(summary(myData$Demographics_age))
