@@ -1,12 +1,9 @@
-read.csv("Data/Complete_Data - 1.csv", header = TRUE)
-myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
-
-myData$Demographics_relig <- as.factor(myData$Demographics_relig)
-
 library(ggplot2)
 library(DiagrammeR)
 
-myData <- read.csv("Data/Complete_Data - 1.csv", header = TRUE)
+myData <- read.csv("Data/new_complete_data - Sheet1.csv", header = TRUE)
+
+myData$Demographics_relig <- as.factor(myData$Demographics_relig)
 
 wellbeing_vars <- c(
   "Total_Spirit_Wellbeing",
@@ -41,3 +38,4 @@ digraph {
   s -> pc2; p -> pc2; so -> pc2; e -> pc2; i -> pc2; ph -> pc2;
 }
 "))
+
