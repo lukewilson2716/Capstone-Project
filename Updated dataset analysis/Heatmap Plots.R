@@ -65,6 +65,112 @@ p3 <- ggplot(filter(myData_cleaned, Religion_Cluster == "Other"),
   )
 
 
+library(scales)
+
+# 1. Data Prep with dynamic n-counts
+myData_overlay <- myData %>%
+  mutate(Religion_Cluster = case_when(
+    Demographics_relig == "1" ~ "Christian",
+    Demographics_relig == "6" ~ "Atheist",
+    TRUE ~ "Other" 
+  )) %>%
+  filter(!is.na(Demographics_rlgsty)) %>%
+  # Calculate n for each cluster
+  group_by(Religion_Cluster) %>%
+  mutate(n_val = n()) %>%
+  ungroup() %>%
+  # Create the label string for the legend
+  mutate(Legend_Label = paste0(Religion_Cluster, " (n=", n_val, ")"))
+
+# 2. Extract the exact strings for the manual scale
+# This ensures the colors match the right group even with the new labels
+labels_lookup <- myData_overlay %>% 
+  select(Religion_Cluster, Legend_Label) %>% 
+  distinct()
+
+# 3. Visualization
+ggplot(myData_overlay, aes(x = Demographics_rlgsty, fill = Legend_Label, color = Legend_Label)) +
+  geom_density(alpha = 0.4, linewidth = 0.8) +
+  
+  # Map the colors to the new Legend_Labels
+  scale_fill_manual(values = c(
+    "Christian" = "#FF0000", 
+    "Atheist"   = "#6A0DAD", 
+    "Other"     = "steelblue"
+  ) %>% setNames(labels_lookup$Legend_Label[match(c("Christian", "Atheist", "Other"), labels_lookup$Religion_Cluster)])) +
+  
+  scale_color_manual(values = c(
+    "Christian" = "#FF0000", 
+    "Atheist"   = "#6A0DAD", 
+    "Other"     = "steelblue"
+  ) %>% setNames(labels_lookup$Legend_Label[match(c("Christian", "Atheist", "Other"), labels_lookup$Religion_Cluster)])) +
+  
+  # Log conversion
+  scale_x_log10(breaks = 1:7, limits = c(1, 7)) +
+  
+  theme_minimal() +
+  labs(
+    title = "Religiosity Distribution Across Religious Clusters",
+    subtitle = "X-axis log-transformed; n denotes participants per cluster",
+    x = "Religiosity Score (Log Scale)",
+    y = "Density",
+    fill = "Religious Group",
+    color = "Religious Group"
+  ) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold")
+  )
+
+
+
+# 1. Data Prep
+myData_overlay <- myData %>%
+  mutate(Religion_Cluster = case_when(
+    Demographics_relig == "1" ~ "Christian",
+    Demographics_relig == "6" ~ "Atheist",
+    TRUE ~ "Other" 
+  )) %>%
+  filter(!is.na(Demographics_rlgsty))
+
+# 2. Visualization
+overlay_plot <- ggplot(myData_overlay, aes(x = Demographics_rlgsty, fill = Religion_Cluster, color = Religion_Cluster)) +
+  # Using geom_density with high transparency (alpha) so overlays are visible
+  geom_density(alpha = 0.4, linewidth = 0.8) +
+  
+  # Applying your specific color scheme
+  scale_fill_manual(values = c(
+    "Christian" = "#FF0000", # Red
+    "Atheist"   = "#6A0DAD", # Purple
+    "Other"     = "steelblue" # Blue
+  )) +
+  scale_color_manual(values = c(
+    "Christian" = "#FF0000", 
+    "Atheist"   = "#6A0DAD", 
+    "Other"     = "steelblue"
+  )) +
+  
+  # Log conversion on X-axis (Natural Log)
+  # labels = label_log() or identity makes it readable
+  scale_x_log10(breaks = 1:7, limits = c(1, 7)) +
+  
+  theme_minimal() +
+  labs(
+    title = "Religiosity Distribution Across Religious Clusters",
+    x = "Religiosity Score (Log Scale)",
+    y = "Density",
+    fill = "Religious Group",
+    color = "Religious Group"
+  ) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+
+overlay_plot
+
+
 
 
 

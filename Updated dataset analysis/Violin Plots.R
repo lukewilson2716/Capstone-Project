@@ -29,13 +29,32 @@ ggplot(myData_class_long, aes(x = Wellness_Dimension, y = Score, fill = Year_Gro
   stat_summary(geom = "point", position = position_identity()) +
   stat_compare_means(method = "t.test", label = "p.signif") +
   scale_fill_manual(values = c("Underclassmen (N=88)" = "#56B4E9", "Upperclassmen (N=243)" = "#E69F00")) +
+  
+  # 1. Update the sublabels (category names)
+  scale_x_discrete(labels = c(
+    "Emot"     = "Emotional",
+    "Int"  = "Intellectual",
+    "Physical"      = "Physical",
+    "Psych" = "Psychological",
+    "Social"        = "Social",
+    "Spirit"     = "Spiritual"
+  )) +
+  
   scale_y_continuous(breaks = 1:7) +
-  labs(title = "Wellness Scores: Class Comparison", fill = "Group") +
+  
+  # 2. Update the main axis title here
+  labs(
+    title = "Wellness Scores: Class Comparison", 
+    fill = "Group",
+    x = "Wellness Dimension"
+  ) +
+  
   coord_cartesian(ylim = c(1, 8)) + 
   theme_minimal() +
-  theme(axis.text.x = element_text(hjust = 1), legend.position = "bottom") 
-#top line to make plot, second to make violin, third for mean dots, fourth for stat sig comp, everything else aesthetics
-
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1), # Added angle for readability
+    legend.position = "right"
+  )
 
 #Prepare Data for sexual orientation analysis - no results of note and pretty much the same process as class analysis above
 myData_sex_long <- myData %>%
