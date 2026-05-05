@@ -36,6 +36,7 @@ summary(model1)
 
 model2 <- aov(Total_Spirit_Wellbeing ~ Religion_Cluster, data = myData_cleaned)
 summary(model2)
+TukeyHSD(model2)
 #Sig result
 
 model3 <- aov(Total_Emot_Wellbeing ~ Religion_Cluster, data = myData_cleaned)
@@ -43,13 +44,15 @@ summary(model3)
 
 model4 <- aov(Total_Psych_Wellbeing ~ Religion_Cluster, data = myData_cleaned)
 summary(model4)
+TukeyHSD(model4)
 #Sig, not as much
 
 model5 <- aov(Total_Physical_Wellbeing ~ Religion_Cluster, data = myData_cleaned)
 summary(model5)
 
-model6 <- aov(Total_Spirit_Wellbeing ~ Religion_Cluster, data = myData_cleaned)
-summary(model2)
+model6 <- aov(Total_Social_Wellbeing ~ Religion_Cluster, data = myData_cleaned)
+summary(model6)
+TukeyHSD(model6)
 
 covModel1 <- aov(Total_Int_Wellbeing ~ Religion_Cluster * Demographics_rlgsty, data = myData_cleaned)
 summary(covModel1)
